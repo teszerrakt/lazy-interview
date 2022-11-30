@@ -1,5 +1,7 @@
 import styles from './styles.module.scss'
 import logo from '@/assets/react.svg'
+import { NavButtons } from '../Navigation'
+import { NAV_ITEMS } from '../Navigation/config'
 
 const Header = () => {
   return (
@@ -9,8 +11,7 @@ const Header = () => {
         LAZY INTV
       </div>
       <div className={styles.navContainer}>
-        <a>Home</a>
-        <a>Favorites</a>
+        <NavButtons navItems={NAV_ITEMS} />
       </div>
     </header>
   )

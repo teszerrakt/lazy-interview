@@ -1,0 +1,23 @@
+.active {
+  button {
+    font-weight: 800;
+    color: $primary-color;
+  }
+}
+
+.navBar {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background-color: $background-color;
+  width: 100%;
+  border-top: solid 1px $secondary-color;
+  z-index: 1;
+
+  @media (min-width: $mq-md) {
+    display: none;
+  }
+}
