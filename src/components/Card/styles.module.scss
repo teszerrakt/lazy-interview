@@ -1,0 +1,22 @@
+.cardContainer {
+  border-radius: 16px;
+  border: solid 1px $secondary-color;
+  background-color: $background-color;
+
+
+}
+
+.imgSkeleton {
+  height: 300px;
+  width: 225px;
+  animation: skeleton-loading;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: $secondary-color;
+  }
+  100% {
+    background-color: $tertiary-color;
+  }
+}
