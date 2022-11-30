@@ -6,6 +6,25 @@ body {
   color: $primary-color;
   margin: 0;
   font-family: 'Inter', sans-serif;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-left: solid 1px $secondary-color;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $secondary-color;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: $primary-color;
+    transition: 300ms;
+  }
 }
 
 .App {
