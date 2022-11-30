@@ -9,7 +9,7 @@ const ItemList = () => {
     return (
       <div className={styles.itemListContainer}>
         {SKELETON_LIST().map((key) => (
-          <Card loading={true} />
+          <Card key={key} loading={true} />
         ))}
       </div>
     )
