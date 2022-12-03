@@ -15,7 +15,7 @@
   background-color: $background-color;
   width: 100%;
   border-top: solid 1px $secondary-color;
-  z-index: 1;
+  z-index: 999;
 
   @media (min-width: $mq-md) {
     display: none;

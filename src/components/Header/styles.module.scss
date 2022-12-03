@@ -3,7 +3,13 @@
   justify-content: center;
   align-items: center;
   padding: 16px 32px;
+  background-color: $background-color;
   border-bottom: solid 1px $secondary-color;
+  position: fixed;
+  top: 0;
+  transition: top 300ms;
+  width: calc(100% - 4 * 16px);
+  z-index: 999;
 
   .logoContainer {
     display: flex;
