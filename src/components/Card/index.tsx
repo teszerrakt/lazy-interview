@@ -1,11 +1,13 @@
 import styles from './styles.module.scss'
 import Skeleton from '../Skeleton'
+import { Movie } from '../../types'
+import { POSTER_PATH } from '../../api'
 
-interface CardProps {
-  loading: boolean
+interface CardProps extends Partial<Movie> {
+  loading?: boolean
 }
 
-const Card = ({ loading }: CardProps) => {
+const Card = ({ loading, ...itemProps }: CardProps) => {
   if (loading) {
     return (
       <div className={styles.cardContainer}>
@@ -16,7 +18,20 @@ const Card = ({ loading }: CardProps) => {
         </div>
       </div>
     )
-  } else return null
+  }
+
+  return (
+    <div className={styles.cardContainer}>
+      <img src={POSTER_PATH(itemProps.poster_path)} />
+      <div className={styles.textContainer}>
+        <span className={styles.title}>{itemProps.title}</span>
+        <span className={styles.rating}>
+          <span>★</span>
+          {itemProps.vote_average}
+        </span>
+      </div>
+    </div>
+  )
 }
 
 export default Card

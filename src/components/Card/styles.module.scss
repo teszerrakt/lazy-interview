@@ -13,20 +13,43 @@
     transition: 300ms;
   }
 
-  .imgSkeleton {
+  .imgSkeleton,
+  img {
+    object-fit: cover;
     border-radius: 16px 16px 0 0;
-    height: 300px;
+    height: 500px;
     width: 100%;
   }
 
-  .textSkeleton {
+  .title {
+    font-size: 1.75rem;
+    font-weight: 800;
+  }
+
+  .rating {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    > span {
+      position: relative;
+      top: -1px;
+    }
+  }
+
+  .textSkeleton,
+  .textContainer {
     display: flex;
     flex-direction: column;
     padding: 32px;
     width: calc(100% - 2 * 16px);
     gap: 16px;
+  }
+
+  .textSkeleton {
     > * {
-      height: 28px;
+      height: 1.75rem;
       width: 100%;
     }
   }
@@ -34,9 +57,10 @@
   @media (min-width: $mq-lg) {
     flex-direction: row;
 
-    .imgSkeleton {
-      min-width: 225px;
-      max-width: 225px;
+    .imgSkeleton,
+    img {
+      min-width: 330px;
+      max-width: 330px;
       border-radius: 16px 0 0 16px;
     }
 
