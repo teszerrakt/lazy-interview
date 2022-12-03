@@ -6,7 +6,7 @@ interface ISkeletonProps {
   className?: string
 }
 
-const DEFAULT_SKELETON_CARD_NUMBER = 6
+const DEFAULT_SKELETON_CARD_NUMBER = 8
 export const SKELETON_LIST = (num = DEFAULT_SKELETON_CARD_NUMBER) =>
   Array.from(Array(num).keys())
 

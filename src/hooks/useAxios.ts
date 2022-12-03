@@ -17,7 +17,8 @@ interface UseAxiosConfigType {
 
 export const useAxios = <ResponseData>(
   config?: AxiosRequestConfig<any>,
-  loadOnStart = true
+  loadOnStart = true,
+  delay = 1500
 ): UseAxiosReturnType<ResponseData> => {
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState<ResponseData>()
@@ -38,7 +39,9 @@ export const useAxios = <ResponseData>(
       .catch((error) => {
         setError(error.message)
       })
-      .finally(() => setLoading(false))
+      .finally(() => {
+        setTimeout(() => setLoading(false), delay)
+      })
   }
 
   useEffect(() => {
