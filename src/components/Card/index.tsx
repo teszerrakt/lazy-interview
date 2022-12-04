@@ -1,5 +1,6 @@
 import styles from './styles.module.scss'
 import Skeleton from '../Skeleton'
+import Image from '../Image'
 import { Movie } from '../../types'
 import { POSTER_PATH } from '../../api'
 
@@ -22,7 +23,10 @@ const Card = ({ loading, ...itemProps }: CardProps) => {
 
   return (
     <div className={styles.cardContainer}>
-      <img src={POSTER_PATH(itemProps.poster_path)} />
+      <Image
+        src={POSTER_PATH(itemProps.poster_path)}
+        alt={itemProps.title || ''}
+      />
       <div className={styles.textContainer}>
         <span className={styles.title}>{itemProps.title}</span>
         <span className={styles.rating}>

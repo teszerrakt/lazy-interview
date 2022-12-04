@@ -1,5 +1,4 @@
 import styles from './styles.module.scss'
-
 interface ISkeletonProps {
   height?: string | number
   width?: string | number
