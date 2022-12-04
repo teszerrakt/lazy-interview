@@ -1,3 +1,5 @@
+export type Favorites<ItemDetail> = Record<string, ItemDetail>
+
 export interface MovieListResponseData {
   page: number
   results: Movie[]

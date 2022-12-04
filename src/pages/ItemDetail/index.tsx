@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useNavigate, useParams } from 'react-router-dom'
 import { API_KEY, DETAIL_API, POSTER_PATH } from '../../api'
 import Button from '../../components/Button'
 import { useAxios } from '../../hooks/useAxios'
-import { MovieDetail } from '../../types'
+import { MovieDetail, Favorites } from '../../types'
 import styles from './styles.module.scss'
 import Image from '../../components/Image'
 import Card from './components/Card'
 import { ReactNode } from 'react'
+import useLocalStorage, { LS_KEY } from '../../hooks/useLocalStorage'
 
 type ItemDetailParams = {
   itemId: string
@@ -28,6 +30,11 @@ const ItemDetail = () => {
       },
     },
   })
+  const [favorites, setFavorites] = useLocalStorage<Favorites<MovieDetail>>(
+    LS_KEY.FAVORITES,
+    {}
+  )
+  const isFavorites = Boolean(favorites[itemId!])
 
   const details: Detail[] = [
     {
@@ -50,6 +57,18 @@ const ItemDetail = () => {
 
   if (!data) return <div>Item does not exist</div>
 
+  const handleAddToFavorites = () => {
+    setFavorites((prevState) => ({ ...prevState, [itemId!]: data }))
+  }
+
+  const handleRemoveFromFavorites = () => {
+    setFavorites((prevState) => {
+      const copy = { ...prevState }
+      delete copy[itemId!]
+      return copy
+    })
+  }
+
   return (
     <>
       <div className={styles.titleContainer}>
@@ -59,7 +78,13 @@ const ItemDetail = () => {
       <div className={styles.itemDetailPage}>
         <Card className={styles.imgContainer}>
           <Image src={POSTER_PATH(data.poster_path)} alt={data.title} />
-          <Button>+ Add To Collection</Button>
+          {isFavorites ? (
+            <Button onClick={handleRemoveFromFavorites}>
+              𝗫 Remove From Favorites
+            </Button>
+          ) : (
+            <Button onClick={handleAddToFavorites}>+ Add To Favorites</Button>
+          )}
         </Card>
         <div className={styles.infoContainer}>
           <Card title="Details">
