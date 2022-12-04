@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { API_KEY, DISCOVER_API } from '../../api'
 
 const ItemList = () => {
-  const { data, error, loading, refetch } = useAxios<ResponseData>()
+  const { data, error, loading, refetch } = useAxios<ResponseData>({})
   const [page, setPage] = useState<number>(1)
   const itemList = data?.results ?? []
   const isItemExist = itemList.length > 0

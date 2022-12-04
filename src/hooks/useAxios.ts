@@ -1,6 +1,12 @@
 import axios, { AxiosRequestConfig } from 'axios'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
+interface UseAxiosParams<T> {
+  config?: AxiosRequestConfig<UseAxiosConfigType>
+  loadOnStart?: boolean
+  delay?: number
+  onSuccess?: (data: T) => void
+}
 interface UseAxiosReturnType<T> {
   loading: boolean
   data: T | undefined
@@ -15,11 +21,12 @@ interface UseAxiosConfigType {
   params?: Record<string, any>
 }
 
-export const useAxios = <ResponseData>(
-  config?: AxiosRequestConfig<any>,
+export const useAxios = <ResponseData>({
+  config,
   loadOnStart = true,
-  delay = 1500
-): UseAxiosReturnType<ResponseData> => {
+  delay = 1500,
+  onSuccess,
+}: UseAxiosParams<ResponseData>): UseAxiosReturnType<ResponseData> => {
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState<ResponseData>()
   const [error, setError] = useState('')
@@ -28,27 +35,31 @@ export const useAxios = <ResponseData>(
     sendRequest(refetchConfig)
   }
 
-  const sendRequest = (config: AxiosRequestConfig<UseAxiosConfigType>) => {
-    setLoading(true)
+  const sendRequest = useCallback(
+    async (config: AxiosRequestConfig<UseAxiosConfigType>) => {
+      setLoading(true)
 
-    axios(config)
-      .then((response) => {
-        setError('')
-        setData(response.data)
-      })
-      .catch((error) => {
-        setError(error.message)
-      })
-      .finally(() => {
-        setTimeout(() => setLoading(false), delay)
-      })
-  }
+      axios(config)
+        .then((response) => {
+          setError('')
+          const data = response.data
+          setData(data)
+          if (onSuccess) onSuccess(data)
+        })
+        .catch((error) => {
+          setError(error.message)
+        })
+        .finally(() => {
+          setTimeout(() => setLoading(false), delay)
+        })
+    },
+    [delay, onSuccess]
+  )
 
   useEffect(() => {
     if (loadOnStart && config) sendRequest(config)
     else setLoading(false)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loadOnStart])
+  }, [config, loadOnStart, sendRequest])
 
   return { loading, data, error, refetch }
 }
