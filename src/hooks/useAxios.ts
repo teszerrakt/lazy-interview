@@ -58,9 +58,10 @@ export const useAxios = <ResponseData>({
   )
 
   useEffect(() => {
-    if (loadOnStart && config) sendRequest(config)
+    if (config) sendRequest(config)
     else setLoading(false)
-  }, [config, loadOnStart, sendRequest])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadOnStart, sendRequest])
 
   return { loading, data, error, refetch }
 }

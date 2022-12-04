@@ -1,16 +1,18 @@
 import { SKELETON_LIST } from '../../components/Skeleton'
-import Card from '../../components/Card'
+import Card from './components/Card'
 import styles from './styles.module.scss'
 import { useAxios } from '../../hooks/useAxios'
-import { ResponseData } from '../../types'
+import { MovieListResponseData } from '../../types'
 import { useEffect } from 'react'
 import { API_KEY, DISCOVER_API } from '../../api'
 import Pagination from '../../components/Pagination'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 const ItemList = () => {
-  const { data, error, loading, refetch } = useAxios<ResponseData>({})
+  const { data, error, loading, refetch } = useAxios<MovieListResponseData>({})
   const [searchParams, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
+
   const itemList = data?.results ?? []
   const isItemExist = itemList.length > 0
   const page = searchParams.get('page') ?? 1
@@ -49,7 +51,13 @@ const ItemList = () => {
     return (
       <div className={styles.itemListContainer}>
         {itemList.map((item) => {
-          return <Card key={item.id} {...item} />
+          return (
+            <Card
+              key={item.id}
+              onClick={() => navigate(`/items/${item.id}`)}
+              {...item}
+            />
+          )
         })}
       </div>
     )

@@ -3,6 +3,7 @@ import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import ItemList from './pages/ItemList'
 import Navigation from './components/Navigation'
 import { Helmet } from 'react-helmet'
+import ItemDetail from './pages/ItemDetail'
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Navigate to="/items" replace />} />
             <Route path="/items" element={<ItemList />} />
+            <Route path="/items/:itemId" element={<ItemDetail />} />
           </Routes>
         </div>
       </Router>

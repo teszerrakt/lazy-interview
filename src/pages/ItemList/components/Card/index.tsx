@@ -1,14 +1,15 @@
 import styles from './styles.module.scss'
-import Skeleton from '../Skeleton'
-import Image from '../Image'
-import { Movie } from '../../types'
-import { POSTER_PATH } from '../../api'
+import Skeleton from '../../../../components/Skeleton'
+import Image from '../../../../components/Image'
+import { Movie } from '../../../../types'
+import { POSTER_PATH } from '../../../../api'
 
 interface CardProps extends Partial<Movie> {
   loading?: boolean
+  onClick?: () => void
 }
 
-const Card = ({ loading, ...itemProps }: CardProps) => {
+const Card = ({ loading, onClick, ...itemProps }: CardProps) => {
   if (loading) {
     return (
       <div className={styles.cardContainer}>
@@ -22,7 +23,7 @@ const Card = ({ loading, ...itemProps }: CardProps) => {
   }
 
   return (
-    <div className={styles.cardContainer}>
+    <div className={styles.cardContainer} onClick={onClick}>
       <Image
         src={POSTER_PATH(itemProps.poster_path)}
         alt={itemProps.title || ''}
