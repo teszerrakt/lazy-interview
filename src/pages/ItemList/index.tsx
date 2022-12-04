@@ -8,7 +8,7 @@ import { API_KEY, DISCOVER_API } from '../../api'
 import Pagination from '../../components/Pagination'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
-const ItemList = () => {
+const ItemListPage = () => {
   const { data, error, loading, refetch } = useAxios<MovieListResponseData>({})
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
@@ -75,4 +75,4 @@ const ItemList = () => {
   )
 }
 
-export default ItemList
+export default ItemListPage

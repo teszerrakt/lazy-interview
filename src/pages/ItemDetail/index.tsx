@@ -19,7 +19,7 @@ type Detail = {
   value: ReactNode
 }
 
-const ItemDetail = () => {
+const ItemDetailPage = () => {
   const { itemId } = useParams<ItemDetailParams>()
   const navigate = useNavigate()
   const { data, error, loading } = useAxios<MovieDetail>({
@@ -102,4 +102,4 @@ const ItemDetail = () => {
   )
 }
 
-export default ItemDetail
+export default ItemDetailPage
