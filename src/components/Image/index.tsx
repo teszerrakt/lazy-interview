@@ -11,6 +11,7 @@ const Image = ({ src, alt }: IImageProps) => {
   return (
     <>
       <Helmet>
+        <link rel="preload" as="image" href={src} />
         <link rel="preload" as="image" href={fallbackImage} />
       </Helmet>
       <img
