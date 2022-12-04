@@ -1,0 +1,26 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 16px;
+  margin-top: 32px;
+
+  .page {
+    border: solid 1px $secondary-color;
+    padding: 8px 16px;
+    border-radius: 8px;
+  }
+
+  button {
+    color: $primary-color;
+    &:disabled {
+      cursor: not-allowed;
+      color: $tertiary-color;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+}

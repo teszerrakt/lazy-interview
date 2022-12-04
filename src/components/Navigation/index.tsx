@@ -7,7 +7,6 @@ export const NavButtons = ({ navItems }: { navItems: NavItem[] }) => {
   return (
     <>
       {navItems.map(({ name, to }) => (
-        // <NavLink className={styles.navBtn} key={name} to={to}>
         <NavLink key={name} to={to}>
           <Button>{name}</Button>
         </NavLink>

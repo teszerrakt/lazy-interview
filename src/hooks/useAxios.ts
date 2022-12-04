@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosRequestConfig } from 'axios'
 import { useCallback, useEffect, useState } from 'react'
 
