@@ -25,7 +25,7 @@ interface UseAxiosConfigType {
 export const useAxios = <ResponseData>({
   config,
   loadOnStart = true,
-  delay = 1500,
+  delay = 500,
   onSuccess,
 }: UseAxiosParams<ResponseData>): UseAxiosReturnType<ResponseData> => {
   const [loading, setLoading] = useState(true)
